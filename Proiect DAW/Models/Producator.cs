@@ -7,8 +7,11 @@ namespace Proiect_DAW.Models
         [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Nume { get; set; }
 
+        public string Descriere { get; set; } 
+
+        public string Adresa { get; set; }
 
     }
 }

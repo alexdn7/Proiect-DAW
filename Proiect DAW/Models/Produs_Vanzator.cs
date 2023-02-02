@@ -2,13 +2,11 @@
 
 namespace Proiect_DAW.Models
 {
-    public class Vanzator
+    public class Produs_Vanzator
     {
         [Key]
         public int Id { get; set; }
 
-        public string Nume { get; set; }
 
-        public string Telefon { get; set; }
     }
 }
