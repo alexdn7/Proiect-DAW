@@ -14,8 +14,8 @@ namespace Proiect_DAW.Models
         public decimal Pret { get; set; }
         public int Stoc { get; set; }
 
+        public Producator Producator { get; set; }
         public ICollection<Produs_Vanzator> Produs_Vanzator { get; set; }
-
 
     }
 }

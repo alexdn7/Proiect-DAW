@@ -1,4 +1,5 @@
 ﻿using Proiect_DAW.Models.Base;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proiect_DAW.Models
@@ -11,5 +12,6 @@ namespace Proiect_DAW.Models
 
         public string Adresa { get; set; }
 
+        public ICollection<Produs> Produse { get; set; }
     }
 }

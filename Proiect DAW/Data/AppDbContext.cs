@@ -38,6 +38,11 @@ namespace Proiect_DAW.Data
                 .HasForeignKey(v => v.VanzatorId);
 
             //Legătura dintre Produs - Producator (1 - M)
+            modelBuilder.Entity<Producator>()
+                .HasMany(pr => pr.Produse)
+                .WithOne(p => p.Producator);
+
+
             base.OnModelCreating(modelBuilder);
         }
     }
