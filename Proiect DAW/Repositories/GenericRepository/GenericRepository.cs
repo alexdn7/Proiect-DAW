@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Proiect_DAW.Data;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Proiect_DAW.Repositories.GenericRepository
@@ -25,9 +28,19 @@ namespace Proiect_DAW.Repositories.GenericRepository
             return await _table.FindAsync(id);
         }
 
+        public async Task<List<TEntity>> GetAllAsync()
+        {
+            var allItems = await _table.AsNoTracking().ToListAsync();
+            return allItems;
+        }
+
         public void Update(TEntity entity)
         {
             _table.Update(entity);
+        }
+        public TEntity FindById(object id)
+        {
+            return _table.Find(id);
         }
 
         public void Delete(TEntity entity) 

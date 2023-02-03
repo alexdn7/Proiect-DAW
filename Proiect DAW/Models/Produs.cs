@@ -1,6 +1,5 @@
 ﻿using Proiect_DAW.Models.Base;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Proiect_DAW.Models
 {
