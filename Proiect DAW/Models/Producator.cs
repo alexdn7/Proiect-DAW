@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Proiect_DAW.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proiect_DAW.Models
 {
-    public class Producator
+    public class Producator: BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         public string Nume { get; set; }
 
         public string Descriere { get; set; } 

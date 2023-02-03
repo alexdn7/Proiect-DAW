@@ -1,12 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Proiect_DAW.Models.Base;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proiect_DAW.Models
 {
     public class Produs_Vanzator
     {
-        [Key]
-        public int Id { get; set; }
+        public Guid ProdusId { get; set; }
+        public Produs Produs { get; set; }
 
+
+        public Guid VanzatorId { get; set; }
+        public Vanzator Vanzator { get; set; }
 
     }
 }
