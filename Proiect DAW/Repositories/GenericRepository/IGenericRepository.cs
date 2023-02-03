@@ -3,13 +3,15 @@ using System.Threading.Tasks;
 
 namespace Proiect_DAW.Repositories.GenericRepository
 {
-    public class IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
         Task CreateAsync(TEntity entity);
 
         Task<TEntity> FindByIdAsync(object id);
+
         void Update(TEntity entity);
 
         void Delete(TEntity entity);
+
     }
 }
