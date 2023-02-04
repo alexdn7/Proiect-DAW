@@ -10,7 +10,7 @@ namespace Proiect_DAW.Models
 
         public string Descriere { get; set; }
 
-        public decimal Pret { get; set; }
+        public double Pret { get; set; }
         public int Stoc { get; set; }
 
         public Producator Producator { get; set; }

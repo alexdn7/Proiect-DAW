@@ -8,8 +8,8 @@ namespace Proiect_DAW.Repositories
 {
     public interface IUnitOfWork
     {
-        IProdusRepository ProdusRepository { get; }
         IVanzatorRepository VanzatorRepository { get; }
+        IProdusRepository ProdusRepository { get; }
         IProducatorRepository ProducatorRepository { get; }
         IUserRepository UserRepository { get; }
         Task<bool> SaveAsync();

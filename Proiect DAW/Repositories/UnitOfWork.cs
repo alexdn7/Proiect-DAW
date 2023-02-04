@@ -11,17 +11,17 @@ namespace Proiect_DAW.Repositories
 {
     public class UnitOfWork: IUnitOfWork
     {
-        public IProdusRepository ProdusRepository { get; set; }
         public IVanzatorRepository VanzatorRepository { get; set; }
+        public IProdusRepository ProdusRepository { get; set; }
         public IProducatorRepository ProducatorRepository { get; set; }
         public IUserRepository UserRepository { get; set; }
 
         public AppDbContext _dbcontext { get; set; }
 
-        public UnitOfWork(IProdusRepository produsRepository, IVanzatorRepository vanzatorRepository,IProducatorRepository producatorRepository, IUserRepository userRepository, AppDbContext appDbContext) 
+        public UnitOfWork(IVanzatorRepository vanzatorRepository, IProdusRepository produsRepository, IProducatorRepository producatorRepository, IUserRepository userRepository, AppDbContext appDbContext) 
         {
-            ProdusRepository = produsRepository;
             VanzatorRepository= vanzatorRepository;
+            ProdusRepository = produsRepository;
             ProducatorRepository = producatorRepository;
             UserRepository = userRepository;
             _dbcontext = appDbContext;

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.Collections.Generic;
 using System.Data;
 using System;
+using System.Linq;
+using Proiect_DAW.Models;
 
 namespace Proiect_DAW.Helpers.NewFolder.Attributes
 {

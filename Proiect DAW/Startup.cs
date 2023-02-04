@@ -1,10 +1,23 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Proiect_DAW.Data;
+using Proiect_DAW.Repositories;
+using Proiect_DAW.Repositories.ProducatorRepository;
+using Proiect_DAW.Repositories.ProdusRepository;
+using Proiect_DAW.Repositories.UsersRepository;
+using Proiect_DAW.Repositories.VanzatorRepository;
+using Proiect_DAW.Services.ProducatorService;
+using Proiect_DAW.Services.ProdusService;
+using Proiect_DAW.Services.VanzatorService;
+using Swashbuckle.AspNetCore;
 
 namespace Proiect_DAW
 {
@@ -20,11 +33,27 @@ namespace Proiect_DAW
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IProdusRepository, ProdusRepository>();
+            services.AddScoped<IVanzatorRepository, VanzatorRepository>();
+            services.AddScoped<IProducatorRepository, ProducatorRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddControllers();
+
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
         }
 
@@ -38,7 +67,9 @@ namespace Proiect_DAW
             else
             {
                 app.UseExceptionHandler("/Error");
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
                 app.UseHsts();
             }
 
@@ -56,6 +87,12 @@ namespace Proiect_DAW
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
             app.UseSpa(spa =>

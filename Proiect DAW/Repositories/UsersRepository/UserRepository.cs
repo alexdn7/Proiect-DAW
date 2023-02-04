@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Proiect_DAW.Repositories.UsersRepository
 {
-    public class UsersRepository: GenericRepository<User>, IUserRepository
+    public class UserRepository: GenericRepository<User>, IUserRepository
     {
-        public UsersRepository(AppDbContext context): base(context)
+        public UserRepository(AppDbContext context): base(context)
         {
 
         }
