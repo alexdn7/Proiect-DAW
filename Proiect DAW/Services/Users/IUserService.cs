@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Proiect_DAW.Services.Users
 {
-    public interface IUsersService
+    public interface IUserService
     {
-        UserResponseDto Atuhentificate(UserRequestDto model);
+        Task Create(User newUser);
+        UserResponseDto Authentificate(User model);
         Task<List<User>> GetAllUsers();
         User GetById(Guid id);
-        Task Create(User newUser);
     }
 }

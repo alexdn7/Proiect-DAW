@@ -4,18 +4,24 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Proiect_DAW.Data;
+using Proiect_DAW.Helpers.JwtUtils;
+using Proiect_DAW.Helpers.Seeders;
 using Proiect_DAW.Repositories;
+using Proiect_DAW.Repositories.LocatieRepository;
 using Proiect_DAW.Repositories.ProducatorRepository;
 using Proiect_DAW.Repositories.ProdusRepository;
 using Proiect_DAW.Repositories.UsersRepository;
 using Proiect_DAW.Repositories.VanzatorRepository;
+using Proiect_DAW.Services.LocatieService;
 using Proiect_DAW.Services.ProducatorService;
 using Proiect_DAW.Services.ProdusService;
+using Proiect_DAW.Services.Users;
 using Proiect_DAW.Services.VanzatorService;
 using Swashbuckle.AspNetCore;
 
@@ -40,8 +46,15 @@ namespace Proiect_DAW
             services.AddScoped<IProdusRepository, ProdusRepository>();
             services.AddScoped<IVanzatorRepository, VanzatorRepository>();
             services.AddScoped<IProducatorRepository, ProducatorRepository>();
+            services.AddScoped<ILocatieRepository, LocatieRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
+            services.AddScoped<IVanzatorService, VanzatorService>();
+            // services.AddScoped<IProducatorService, ProducatorService>();
+            //services.AddScoped<IProdusService, ProdusService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILocatieService, LocatieService>();
+            services.AddScoped<IJwtUtils, JwtUtils>();
             services.AddControllers();
 
 
@@ -62,6 +75,13 @@ namespace Proiect_DAW
         {
             if (env.IsDevelopment())
             {
+                //using (var serviceScope = app.ApplicationServices.CreateScope())
+                //{
+                // var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
+                // context.Database.EnsureCreated();
+                // var seeder = new Seeder(context);
+                // seeder.Seeder();
+                //}
                 app.UseDeveloperExceptionPage();
             }
             else

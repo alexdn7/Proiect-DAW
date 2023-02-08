@@ -1,4 +1,5 @@
 ﻿using Proiect_DAW.Models.Base;
+using System;
 using System.Collections.Generic;
 
 namespace Proiect_DAW.Models
@@ -10,6 +11,9 @@ namespace Proiect_DAW.Models
         public string Descriere { get; set; } 
 
         public string Adresa { get; set; }
+
+        public Locatie Locatie { get; set; }
+        public Guid LocatieId { get; set; }
 
         public ICollection<Produs> Produse { get; set; }
     }

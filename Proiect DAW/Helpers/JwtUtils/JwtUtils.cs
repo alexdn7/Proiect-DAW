@@ -13,6 +13,7 @@ namespace Proiect_DAW.Helpers.JwtUtils
     public class JwtUtils : IJwtUtils
     {
         public readonly AppSettings _appSettings;
+
         public JwtUtils(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
@@ -26,11 +27,10 @@ namespace Proiect_DAW.Helpers.JwtUtils
             {
                 Subject = new ClaimsIdentity(
                     new[] { new Claim("id", user.Id.ToString()) }
-                ),
-                Expires = DateTime.UtcNow.AddDays(100),
+                    ),
+                Expires = DateTime.UtcNow.AddDays(120),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(appPrivateKey), SecurityAlgorithms.HmacSha256)
             };
-
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
@@ -49,14 +49,16 @@ namespace Proiect_DAW.Helpers.JwtUtils
                 IssuerSigningKey = new SymmetricSecurityKey(appPrivateKey),
                 ValidateIssuer = true,
                 ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
+                ClockSkew = TimeSpan.Zero,
             };
-
             try
             {
                 tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var userId = new Guid(jwtToken.Claims.FirstOrDefault(x => x.Type == "id").Value);
+                var result = jwtToken.Claims.FirstOrDefault(x => x.Type == "id");
+                if (result == null)
+                    return Guid.Empty;
+                var userId = new Guid(result.Value);
                 return userId;
             }
             catch (Exception)

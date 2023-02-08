@@ -6,6 +6,7 @@ using System;
 using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 using Proiect_DAW.Repositories.UsersRepository;
+using Proiect_DAW.Repositories.LocatieRepository;
 
 namespace Proiect_DAW.Repositories
 {
@@ -15,17 +16,18 @@ namespace Proiect_DAW.Repositories
         public IProdusRepository ProdusRepository { get; set; }
         public IProducatorRepository ProducatorRepository { get; set; }
         public IUserRepository UserRepository { get; set; }
+        public ILocatieRepository LocatieRepository { get; }
 
         public AppDbContext _dbcontext { get; set; }
 
-        public UnitOfWork(IVanzatorRepository vanzatorRepository, IProdusRepository produsRepository, IProducatorRepository producatorRepository, IUserRepository userRepository, AppDbContext appDbContext) 
+        public UnitOfWork(IVanzatorRepository vanzatorRepository, IProdusRepository produsRepository, IProducatorRepository producatorRepository, ILocatieRepository locatieRepository,IUserRepository userRepository, AppDbContext appDbContext) 
         {
             VanzatorRepository= vanzatorRepository;
             ProdusRepository = produsRepository;
             ProducatorRepository = producatorRepository;
             UserRepository = userRepository;
+            LocatieRepository = locatieRepository; 
             _dbcontext = appDbContext;
-        
         }
         
         public async Task<bool> SaveAsync()

@@ -14,7 +14,7 @@ namespace Proiect_DAW.Repositories.UsersRepository
 
         public User FindByUsername(string username)
         {
-            return _table.FirstOrDefault(x => x.Username == username);
+            return _table.FirstOrDefault(x => x.Name == username);
         }
     }
 }

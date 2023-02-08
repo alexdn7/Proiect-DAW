@@ -16,7 +16,7 @@ namespace Proiect_DAW.Helpers.MiddleWare
             _nextRequestDelegate = requestDelegate;
         }
 
-        public async Task Invoke(HttpContext httpContext, IUsersService usersService, IJwtUtils jwtUtils)
+        public async Task Invoke(HttpContext httpContext, IUserService usersService, IJwtUtils jwtUtils)
         {
             var token = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split("").Last();
             var userId = jwtUtils.ValidateJwtToken(token);

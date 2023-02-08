@@ -1,9 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Proiect_DAW.Models.Enums;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proiect_DAW.Models.DTOs.Users
 {
-    public class UserRequestDto
+    public class CreateUser
     {
+        public Guid Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 
@@ -16,7 +21,6 @@ namespace Proiect_DAW.Models.DTOs.Users
         [Required]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        public string PasswordHash { get; set; }
+        public Role RoleName { get; set; }
     }
 }

@@ -9,33 +9,33 @@ using System.Threading.Tasks;
 
 namespace Proiect_DAW.Services.Users
 {
-    public class UsersService: IUsersService
+    public class UserService: IUserService
     {
         public IUnitOfWork _IUnitOfWork;
         private IJwtUtils _jwtUtils;
 
-        public UsersService(IUnitOfWork iUnitOfWork, IJwtUtils jwtUtils)
+        public UserService(IUnitOfWork iUnitOfWork, IJwtUtils jwtUtils)
         {
             _IUnitOfWork = iUnitOfWork;
             _jwtUtils = jwtUtils;
-        }
-
-        public UserResponseDto Atuhentificate(UserRequestDto model)
-        {
-            var user = _IUnitOfWork.UserRepository.FindByUsername(model.UserName);
-            if(user == null || !BCryptNet.Verify(model.Password, user.PasswordHash))
-            {
-                return null; 
-            }
-
-            var jwtToken = _jwtUtils.GenerateJwtToken(user);
-            return new UserResponseDto(user, jwtToken);
         }
 
         public async Task Create(User newUser)
         {
             await _IUnitOfWork.UserRepository.CreateAsync(newUser);
             await _IUnitOfWork.SaveAsync();
+        }
+
+        public UserResponseDto Authentificate(User model)
+        {
+            var user = _IUnitOfWork.UserRepository.FindByUsername(model.Name);
+            if(user == null || !BCryptNet.Verify(model.PasswordHash, user.PasswordHash))
+            {
+                return null; 
+            }
+
+            var jwtToken = _jwtUtils.GenerateJwtToken(user);
+            return new UserResponseDto(user, jwtToken);
         }
 
         public async Task<List<User>> GetAllUsers()

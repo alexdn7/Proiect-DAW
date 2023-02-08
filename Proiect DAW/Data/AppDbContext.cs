@@ -9,6 +9,7 @@ namespace Proiect_DAW.Data
         public DbSet<Producator> Producatori { get; set; }
         public DbSet<Vanzator> Vanzatori { get; set; }
         public DbSet<Produs_Vanzator> Produse_Vanzatori { get; set; }
+        public DbSet<Locatie> Locatii { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
@@ -41,6 +42,12 @@ namespace Proiect_DAW.Data
             modelBuilder.Entity<Producator>()
                 .HasMany(pr => pr.Produse)
                 .WithOne(p => p.Producator);
+
+            // Legătura dintre Locatie si Producator (1 - 1)
+            modelBuilder.Entity<Producator>()
+                .HasOne(l => l.Locatie)
+                .WithOne(pr => pr.Producator)
+                .HasForeignKey<Producator>(l => l.LocatieId);
 
 
             base.OnModelCreating(modelBuilder);
