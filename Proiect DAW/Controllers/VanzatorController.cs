@@ -6,6 +6,7 @@ using Proiect_DAW.Models.Enums;
 using Proiect_DAW.Services.VanzatorService;
 using System.Threading.Tasks;
 using Proiect_DAW.Models.DTOs;
+using System;
 
 namespace Proiect_DAW.Controllers
 {
@@ -38,6 +39,23 @@ namespace Proiect_DAW.Controllers
         {
             return Ok(await _vanzatorService.GetAll());
         }
-    }
 
+        [HttpPut("edit/{id}")]
+        public async Task<ActionResult> UpdateArticol(Guid id, [FromBody] VanzatorDto vanzator)
+        {
+            var verif = await _vanzatorService.Update(id, vanzator);
+            if (verif == false)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult> DeleteArticol(Guid id)
+        {
+            await _vanzatorService.Delete(id);
+            return Ok();
+        }
+    }
 }

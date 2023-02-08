@@ -7,9 +7,9 @@ namespace Proiect_DAW.Services.ProducatorService
 {
     public interface IProducatorService
     {
-        Task AddProducator(Producator newProducator);
+        Task Create(Producator newProducator);
         Task<List<Producator>> GetAll();
 
-        Task DeleteProducator(Guid ProducatorId);
+
     }
 }

@@ -3,7 +3,6 @@
     public class VanzatorDto
     {
         public string Nume { get; set; }
-
         public string Telefon { get; set; }
     }
 }

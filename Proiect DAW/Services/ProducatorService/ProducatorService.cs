@@ -15,7 +15,7 @@ namespace Proiect_DAW.Services.ProducatorService
             _unitOfWork = unitOfWork;   
         }
 
-        public async Task AddProducator(Producator newProducator)
+        public async Task Create(Producator newProducator)
         {
             await _unitOfWork.ProducatorRepository.CreateAsync(newProducator);
             await _unitOfWork.SaveAsync();
@@ -27,14 +27,5 @@ namespace Proiect_DAW.Services.ProducatorService
             return prod;
         }
 
-        public async Task DeleteProducator(Guid ProducatorId)
-        {
-            var prod = await _unitOfWork.ProducatorRepository.FindByIdAsync(ProducatorId);
-
-            if(prod != null)
-                _unitOfWork.ProducatorRepository.Delete(prod);
-            
-            await _unitOfWork.SaveAsync();
-        }
     }
 }

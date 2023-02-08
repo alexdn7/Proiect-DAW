@@ -1,6 +1,7 @@
 ﻿using Proiect_DAW.Models;
 using Proiect_DAW.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Proiect_DAW.Services.ProdusService
@@ -14,10 +15,15 @@ namespace Proiect_DAW.Services.ProdusService
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddProdus(Produs produs)
+        public async Task Create(Produs produs)
         {
             await _unitOfWork.ProdusRepository.CreateAsync(produs);
             await _unitOfWork.SaveAsync();
+        }
+
+        public async Task<List<Produs>> GetAll()
+        {
+            return await _unitOfWork.ProdusRepository.GetAllAsync();
         }
 
         public async Task DeleteProdus(Guid id)
@@ -26,7 +32,7 @@ namespace Proiect_DAW.Services.ProdusService
             
             if(prod != null) 
             {
-                _unitOfWork.ProdusRepository.Delete(prod);
+                await _unitOfWork.ProdusRepository.Delete(prod);
             }
 
             await _unitOfWork.SaveAsync();

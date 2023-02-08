@@ -10,8 +10,6 @@ namespace Proiect_DAW.Models
 
         public string Descriere { get; set; } 
 
-        public string Adresa { get; set; }
-
         public Locatie Locatie { get; set; }
         public Guid LocatieId { get; set; }
 

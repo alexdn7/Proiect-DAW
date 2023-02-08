@@ -7,9 +7,7 @@ namespace Proiect_DAW.Models
     {
         public string ImgURL { get; set; }
         public string Denumire { get; set; }
-
         public string Descriere { get; set; }
-
         public double Pret { get; set; }
         public int Stoc { get; set; }
 

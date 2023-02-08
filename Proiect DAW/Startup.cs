@@ -50,8 +50,8 @@ namespace Proiect_DAW
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IVanzatorService, VanzatorService>();
-            // services.AddScoped<IProducatorService, ProducatorService>();
-            //services.AddScoped<IProdusService, ProdusService>();
+            services.AddScoped<IProducatorService, ProducatorService>();
+            services.AddScoped<IProdusService, ProdusService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILocatieService, LocatieService>();
             services.AddScoped<IJwtUtils, JwtUtils>();

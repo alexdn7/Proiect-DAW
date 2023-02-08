@@ -40,10 +40,10 @@ namespace Proiect_DAW.Repositories.GenericRepository
         }
         public TEntity FindById(object id)
         {
-            return _table.Find(id);
+            return  _table.Find(id);
         }
 
-        public void Delete(TEntity entity) 
+        public async Task Delete(TEntity entity) 
         { 
             _table.Remove(entity);
         }

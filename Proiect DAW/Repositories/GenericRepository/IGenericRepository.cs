@@ -10,10 +10,12 @@ namespace Proiect_DAW.Repositories.GenericRepository
         Task<TEntity> FindByIdAsync(object id);
 
         void Update(TEntity entity);
+        
         TEntity FindById(object id);
+        
         Task<List<TEntity>> GetAllAsync();
 
-        void Delete(TEntity entity);
+        Task Delete(TEntity entity);
 
     }
 }
