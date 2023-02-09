@@ -1,4 +1,6 @@
-﻿namespace Proiect_DAW.Models.DTOs
+﻿using System;
+
+namespace Proiect_DAW.Models.DTOs
 {
     public class ProdusDto
     {
@@ -7,5 +9,7 @@
         public string Descriere { get; set; }
         public double Pret { get; set; }
         public int Stoc { get; set; }
+
+        public Guid ProducatorID { get; set; }
     }
 }

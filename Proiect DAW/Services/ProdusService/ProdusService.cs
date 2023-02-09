@@ -2,6 +2,7 @@
 using Proiect_DAW.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Proiect_DAW.Services.ProdusService
@@ -36,6 +37,16 @@ namespace Proiect_DAW.Services.ProdusService
             }
 
             await _unitOfWork.SaveAsync();
+        }
+
+        public List<Produs> GetAllProdusesWithPriceUnder(double pret)
+        {
+            return _unitOfWork.ProdusRepository.GetAllProdusesWithPriceUnder(pret);
+        }
+
+        public IEnumerable<IGrouping<Producator, Produs>> GroupByProducator()
+        {
+            return _unitOfWork.ProdusRepository.GroupByProducator();
         }
     }
 }

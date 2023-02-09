@@ -9,7 +9,7 @@ namespace Proiect_DAW.Services.ProducatorService
     {
         Task Create(Producator newProducator);
         Task<List<Producator>> GetAll();
-
-
+        Task<Producator> GetLocationForProducerAsync(Guid ProducatorID);
+        Task<int> GetNumberOfProdusesMadeByProducerAsync(Guid producatorId);
     }
 }

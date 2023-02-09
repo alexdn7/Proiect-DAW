@@ -9,7 +9,7 @@ namespace Proiect_DAW.Repositories.GenericRepository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly AppDbContext _context;
+        public readonly AppDbContext _context;
         protected readonly DbSet<TEntity> _table;
 
         public GenericRepository(AppDbContext context)

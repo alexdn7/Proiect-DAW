@@ -7,6 +7,8 @@ using Proiect_DAW.Services.VanzatorService;
 using System.Threading.Tasks;
 using Proiect_DAW.Models.DTOs;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Proiect_DAW.Controllers
 {
@@ -21,7 +23,7 @@ namespace Proiect_DAW.Controllers
             _vanzatorService = vanzatorService;
         }
 
-        [HttpPost("Adauga-vanzator")]
+        [HttpPost("Adauga-vanzator"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateVanzator(VanzatorDto vanzator)
         {
             var VanzatorToCreate = new Vanzator
@@ -34,14 +36,14 @@ namespace Proiect_DAW.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet("Toti-vanzatorii"), Authorize("User, Admin")]
          public async Task<IActionResult> GetAll()
         {
             return Ok(await _vanzatorService.GetAll());
         }
 
-        [HttpPut("edit/{id}")]
-        public async Task<ActionResult> UpdateArticol(Guid id, [FromBody] VanzatorDto vanzator)
+        [HttpPut("edit/{id}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult> UpdateVanzator(Guid id, [FromBody] VanzatorDto vanzator)
         {
             var verif = await _vanzatorService.Update(id, vanzator);
             if (verif == false)
@@ -51,8 +53,8 @@ namespace Proiect_DAW.Controllers
             return Ok();
         }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<ActionResult> DeleteArticol(Guid id)
+        [HttpDelete("delete/{id}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult> DeteleVendor(Guid id)
         {
             await _vanzatorService.Delete(id);
             return Ok();

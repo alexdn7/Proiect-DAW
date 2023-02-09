@@ -23,9 +23,17 @@ namespace Proiect_DAW.Services.ProducatorService
 
         public async Task<List<Producator>> GetAll()
         {
-            var prod = await _unitOfWork.ProducatorRepository.GetAllAsync();
-            return prod;
+            return await _unitOfWork.ProducatorRepository.GetAllAsync();
+        }
+        
+        public async Task<Producator> GetLocationForProducerAsync(Guid ProducatorID)
+        {
+            return await _unitOfWork.ProducatorRepository.GetLocationForProducerAsync(ProducatorID);
         }
 
+        public async Task<int> GetNumberOfProdusesMadeByProducerAsync(Guid producatorId)
+        {
+            return await _unitOfWork.ProducatorRepository.GetNumberOfProdusesMadeByProducerAsync(producatorId);
+        }
     }
 }

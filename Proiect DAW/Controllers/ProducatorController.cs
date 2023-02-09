@@ -4,6 +4,8 @@ using Proiect_DAW.Models;
 using Proiect_DAW.Services.ProducatorService;
 using Proiect_DAW.Services.VanzatorService;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace Proiect_DAW.Controllers
 {
@@ -18,7 +20,7 @@ namespace Proiect_DAW.Controllers
             _producatorService = producatorService;
         }
 
-        [HttpPost("Adauga-producator")]
+        [HttpPost("Adauga-producator"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(ProducatorDto producator)
         {
             var ProducerToCreate = new Producator
@@ -36,6 +38,13 @@ namespace Proiect_DAW.Controllers
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _producatorService.GetAll());
+        }
+
+        [HttpGet("Get-number")]
+        public async Task<IActionResult> GetNumberOfProdusesMadeByProducerAsync(Guid producatorId)
+        {
+            var raspuns = await _producatorService.GetNumberOfProdusesMadeByProducerAsync(producatorId);
+            return Ok(raspuns);
         }
     }
 }

@@ -21,14 +21,14 @@ namespace Proiect_DAW.Controllers
 
 
             [HttpPost("create-user")]
-            public async Task<IActionResult> CreateTeacher(User user)
+            public async Task<IActionResult> CreateUser(User user)
             {
                 await _userService.Create(user);
                 return Ok();
             }
 
             [HttpPost("login-user")]
-            public IActionResult LoginTeacher(User user)
+            public IActionResult LoginUser(User user)
             {
                 var response = _userService.Authentificate(user);
                 if (response == null)
